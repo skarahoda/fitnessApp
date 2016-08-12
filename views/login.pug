@@ -1,0 +1,20 @@
+extends layout
+
+block content
+	div.row
+		div.col-md-4.col-sm-2
+		div(style="padding-top: 0px; padding-bottom: 20px;").col-md-4.col-sm-8.col-xs-12.jumbotron
+			h4.text-bold.text-center Welcome to FitnessApp
+			h4.text-center Login or Register with:
+			div.row
+				div.col-xs-6
+					a(href="/users/auth/facebook").btn.btn-social.btn-block.btn-facebook
+						span.fa.fa-facebook
+						| facebook
+				div.col-xs-6
+					a(href="/users/auth/google").btn.btn-social.btn-block.btn-danger
+						span.fa.fa-google
+						| Google
+		div.col-md-4.col-sm-2
+
+

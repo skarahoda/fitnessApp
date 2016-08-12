@@ -5,8 +5,9 @@ var router = express.Router();
 router.get('/', function (req, res) {
 	var title = 'Express';
 	if (req.isAuthenticated())
-		title = 'Authenticated ' + title;
-	res.render('index', {title: title});
+		res.render('index');
+	else
+		res.render('login');
 });
 
 module.exports = router;

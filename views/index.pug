@@ -1,11 +1,76 @@
 extends layout
 
 block content
-	h1= title
-	p Welcome to #{title}
-	p Login or Register with:
-	a(href="/users/auth/facebook").btn.btn-primary
-		span.fa.fa-facebook Facebook
-	br
-	a(href="/users/auth/google").btn.btn-danger
-		span.fa.fa-google Google
+	div.row.navbar.navbar-default.navbar-fixed-top
+		div.container
+			div.navbar-header
+				button(type="button", data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar").navbar-toggle.collapsed
+					span.sr-only Toggle navigation
+					span.icon-bar
+					span.icon-bar
+					span.icon-bar
+				a(href="/").navbar-brand Fitness App
+
+			div(id="navbar").navbar-collapse.collapse
+				ul.nav.navbar-nav.navbar-right
+					li
+						a(href="").btn.btn-block
+							span(style="padding-right: 5px").fa.fa-mobile-phone
+							| Find it
+					li
+						a(href="").btn.btn-block
+							span(style="padding-right: 5px").fa.fa-list-ul
+							| Status
+					li.dropdown
+						a(href="", data-toggle="dropdown", role="button", aria-haspopup="true", aria-expanded="false").dropdown-toggle
+							span(style="padding-right: 5px").fa.fa-user
+							| {{username}}
+							span.caret
+						ul.dropdown-menu
+							li
+								a(href="") User Profile
+							li
+								a(href="") Logout
+	div.container
+		div(style="margin-top: 10px; margin-bottom: 10px").row
+			div.-header.col-md-2
+				h3(style="margin-top: 0px; margin-bottom: 0px") Activity
+			div.col-md-4
+			div.col-md-6.hidden
+				div.col-md-6
+					div.form-group
+						div(id = "datePickerStart").input-group.date
+							span(style="cursor:default").input-group-addon From:
+							input(type="text").form-control
+							span.input-group-addon
+								span.fa.fa-calendar
+				div.col-md-6
+					div.form-group
+						div(id = "datePickerEnd").input-group.date
+							span(style="cursor:default").input-group-addon To:
+							input(type="text").form-control
+							span.input-group-addon
+								span.fa.fa-calendar
+
+	div.row.navbar.navbar-default.navbar-fixed-bottom
+		div.container
+			div.navbar-header
+				button(type="button", data-toggle="collapse" data-target="#navbar2" aria-expanded="false" aria-controls="navbar").navbar-toggle.collapsed
+					span.sr-only Toggle navigation
+					span.fa.fa-calendar
+				a(href="/").navbar-brand Time interval
+
+			div(id="navbar2").navbar-collapse.collapse
+				ul.nav.navbar-nav.navbar-right
+					li.active
+						a(href="").btn.btn-block Last Day
+					li
+						a(href="").btn.btn-block Last Week
+					li
+						a(href="").btn.btn-block Last Month
+					li
+						a(href="").btn.btn-block Last Year
+					li
+						a(href="").btn.btn-block Custom
+
+
