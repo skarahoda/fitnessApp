@@ -1,0 +1,21 @@
+{
+  "name": "fitnessApp",
+  "description": "",
+  "main": "",
+  "authors": [
+    "berkcirisci <berkcirisci@sabanciuniv.edu>"
+  ],
+  "license": "MIT",
+  "homepage": "https://github.com/skarahoda/fitnessApp",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "bootstrap": "^3.3.7",
+    "font-awesome": "^4.6.3"
+  }
+}
