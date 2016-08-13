@@ -1,6 +1,5 @@
 npm-debug.log
 
-public/bower_components/*
-node_modules/*
-
-.idea/*
+.idea/
+node_modules/
+public/bower_components/

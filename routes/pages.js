@@ -2,14 +2,8 @@ var express = require('express');
 var router = express.Router();
 
 /* GET home page. */
-router.get('/', isLoggedIn, function (req, res) {
-	var username = req.user.facebook.name || req.user.google.name;
-	res.render('index', {username: username});
-});
-
-/* GET login page. */
-router.get('/login', function (req, res) {
-	res.render('login');
+router.get('/dashboard', isLoggedIn, function (req, res) {
+	res.render('dashboard');
 });
 
 
