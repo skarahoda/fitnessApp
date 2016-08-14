@@ -7,8 +7,12 @@ app.config(function ($routeProvider) {
 	$routeProvider
 
 		.when('/', {
-			templateUrl: 'pages/dashboard',
+			templateUrl: 'dashboard/page',
 			controller: 'DashboardController'
+		})
+		.when('/status', {
+			templateUrl: 'devices/page',
+			controller: 'StatusController'
 		})
 		.otherwise({redirectTo: '/'});
 });

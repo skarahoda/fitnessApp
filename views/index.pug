@@ -19,7 +19,7 @@ html(ng-app='fitnessApp')
 						span.icon-bar
 						span.icon-bar
 						span.icon-bar
-					a(href="/").navbar-brand Fitness App
+					a(href="#/").navbar-brand Fitness App
 
 				div(id="navbar").navbar-collapse.collapse
 					ul.nav.navbar-nav.navbar-right
@@ -28,19 +28,19 @@ html(ng-app='fitnessApp')
 								span(style="padding-right: 5px").fa.fa-mobile-phone
 								| Find it
 						li
-							a(href="").btn.btn-block
+							a(href="#/status").btn.btn-block
 								span(style="padding-right: 5px").fa.fa-list-ul
 								| Status
 						li.dropdown
 							a(href="", data-toggle="dropdown", role="button", aria-haspopup="true", aria-expanded="false").dropdown-toggle
 								span(style="padding-right: 5px").fa.fa-user
-								| {{username}}
+								| #{username}
 								span.caret
 							ul.dropdown-menu
 								li
 									a(href="") User Profile
 								li
-									a(href="") Logout
+									a(href="/users/logout") Logout
 		div.ng-view
 
 		//scripts from bower
@@ -54,4 +54,4 @@ html(ng-app='fitnessApp')
 
 		//Angular Controllers
 		script(src='/javascripts/angular/controllers/dashboardController.js')
-
+		script(src='/javascripts/angular/controllers/statusController.js')

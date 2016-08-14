@@ -5,6 +5,9 @@
 // load the things we need
 var mongoose = require('mongoose');
 
+function username(name) {
+	return name || this.facebook.name || this.google.name;
+}
 // define the schema for our user model
 var userSchema = mongoose.Schema({
 	facebook: {
@@ -18,7 +21,8 @@ var userSchema = mongoose.Schema({
 		token: String,
 		email: String,
 		name: String
-	}
+	},
+	name: {type: String, get: username}
 });
 
 // create the model for users and expose it to our app
