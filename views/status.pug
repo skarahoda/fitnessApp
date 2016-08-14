@@ -1,0 +1,28 @@
+extends layout
+
+block content
+	div.row
+		div.col-md-4.col-sm-2
+		div(style="padding-top: 10px; padding-bottom: 10px;").col-md-4.col-sm-8.col-xs-12.jumbotron
+			div.row
+				h3(style="margin-top: 0px; margin-bottom: 0px; padding-left: 10px;").text-danger Status
+			div(style="padding-bottom:20px; padding-top:20px").row
+				div.col-xs-5
+					div.fa.fa-4x.fa-tablet.pull-right
+				div.col-xs-7
+					div.list-group-item-text.pull-left
+						div.row iPad
+						div.row
+							span.fa.fa-refresh
+							|  4 days ago
+			div(style="padding-bottom:20px; padding-top:20px").row
+				div.col-xs-6.text-center
+					div.row Type
+					div.row.fa.fa-4x.fa-hand-o-right
+					div.row Wristband
+				div.col-xs-6.text-center
+					div.row Battery Life
+					div.row.fa.fa-4x.fa-battery-2
+					div.row 7 days
+		div.col-md-4.col-sm-2
+
