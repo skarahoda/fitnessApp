@@ -3,8 +3,8 @@ var router = express.Router();
 var isLoggedIn = require('./isLoggedIn');
 
 /* GET home page. */
-router.get('/', isLoggedIn, function (req, res) {
-	var username = req.user.facebook.name || req.user.google.name;
-	res.render('index', {username: username});
+router.get('/page', isLoggedIn, function (req, res) {
+	res.render('dashboard');
 });
+
 module.exports = router;
