@@ -25,9 +25,6 @@ module.exports = function (passport) {
 		});
 	});
 
-	// code for login (use('local-login', new LocalStategy))
-	// code for signup (use('local-signup', new LocalStategy))
-
 	// =========================================================================
 	// FACEBOOK ================================================================
 	// =========================================================================
@@ -109,7 +106,7 @@ module.exports = function (passport) {
 						// if a user is found, log them in
 						return done(null, user);
 					} else {
-						// if the user isnt in our database, create a new user
+						// if the user is not in our database, create a new user
 						var newUser = new User();
 
 						// set all of the relevant information
