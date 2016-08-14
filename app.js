@@ -8,7 +8,8 @@ var mongoose = require('mongoose');
 var passport = require('passport');
 var session = require('express-session');
 
-var routes = require('./routes/index');
+var pages = require('./routes/pages');
+var index = require('./routes/index');
 var users = require('./routes/users');
 var passportConfig = require('./config/passport');
 
@@ -41,7 +42,8 @@ app.use(session({
 app.use(passport.initialize());
 app.use(passport.session());
 
-app.use('/', routes);
+app.use('/', index);
+app.use('/pages', pages);
 app.use('/users', users(passport));
 
 // catch 404 and forward to error handler
