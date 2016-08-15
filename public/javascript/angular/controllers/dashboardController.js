@@ -4,14 +4,11 @@
 angular.module('fitnessApp').controller('DashboardController', function ($scope) {
 
 	$scope.config = {
-		title: 'Products',
 		tooltips: true,
-		labels: false,
+		labels: true,
 		mouseover: function () {
 		},
 		mouseout: function () {
-		},
-		click: function () {
 		},
 		legend: {
 			display: true,
@@ -21,20 +18,43 @@ angular.module('fitnessApp').controller('DashboardController', function ($scope)
 	};
 
 	$scope.data = {
-		series: ['Sales', 'Income', 'Expense', 'Laptops', 'Keyboards'],
+		series: ['Steps per 5 Minutes', 'Calories Burnt'],
 		data: [{
-			x: "Laptops",
-			y: [100, 500, 0],
-			tooltip: "this is tooltip"
+			x: "00:00",
+			y: [100, 200]
 		}, {
-			x: "Desktops",
-			y: [300, 100, 100]
+			x: "06:00",
+			y: [200, 300]
 		}, {
-			x: "Mobiles",
-			y: [351]
+			x: "12:00",
+			y: [200, 100]
 		}, {
-			x: "Tablets",
-			y: [54, 0, 879]
+			x: "18:00",
+			y: [300, 220]
+		}]
+	};
+
+	$scope.data2 = {
+		data: [{
+			x: "Sleep",
+			y: [6],
+			tooltip: "%25"
+		}, {
+			x: "Sedentary",
+			y: [2],
+			tooltip: "%8.3"
+		}, {
+			x: "Lightly Active",
+			y: [6],
+			tooltip: "%25"
+		}, {
+			x: "Fairly Active",
+			y: [4],
+			tooltip: "%16.7"
+		}, {
+			x: "Very Active",
+			y: [6],
+			tooltip: "%25"
 		}]
 	};
 });
