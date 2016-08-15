@@ -12,6 +12,17 @@ router.get('/login', function (req, res) {
 	res.render('login');
 });
 
+/* GET login page. */
+router.post('/myInfo', isLoggedIn, function (req, res) {
+	res.status(200).json({
+		name: req.user.name,
+		id: req.user.id,
+		weight: req.user.weight,
+		height: req.user.height,
+		isGoogleConnected: req.user.google != null
+	});
+});
+
 // route for showing the profile page
 router.get('/profile', isLoggedIn, function (req, res) {
 	res.render('profile');

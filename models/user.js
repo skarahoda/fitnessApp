@@ -10,6 +10,9 @@ function username(name) {
 }
 // define the schema for our user model
 var userSchema = mongoose.Schema({
+	name: {type: String, get: username},
+	height: {type: Number, default: 170},
+	weight: {type: Number, default: 70},
 	facebook: {
 		id: String,
 		token: String,
@@ -21,8 +24,7 @@ var userSchema = mongoose.Schema({
 		token: String,
 		email: String,
 		name: String
-	},
-	name: {type: String, get: username}
+	}
 });
 
 // create the model for users and expose it to our app

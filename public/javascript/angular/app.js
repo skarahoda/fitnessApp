@@ -1,7 +1,7 @@
 /**
  * Created by skarahoda on 14.08.2016.
  */
-var app = angular.module('fitnessApp', ['ngRoute', 'googlechart']);
+var app = angular.module('fitnessApp', ['ngRoute', 'ngResource', 'googlechart']);
 
 app.config(function ($routeProvider) {
 	$routeProvider
