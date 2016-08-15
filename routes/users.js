@@ -14,9 +14,7 @@ router.get('/login', function (req, res) {
 
 // route for showing the profile page
 router.get('/profile', isLoggedIn, function (req, res) {
-	res.render('index', {
-		user: req.user // get the user out of session and pass to template
-	});
+	res.render('profile');
 });
 
 // route for logging out

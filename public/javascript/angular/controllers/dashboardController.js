@@ -3,58 +3,103 @@
  */
 angular.module('fitnessApp').controller('DashboardController', function ($scope) {
 
-	$scope.config = {
-		tooltips: true,
-		labels: true,
-		mouseover: function () {
-		},
-		mouseout: function () {
-		},
-		legend: {
-			display: true,
-			//could be 'left, right'
-			position: 'right'
-		}
+	$scope.timeActivityChart = {};
+
+	$scope.timeActivityChart.type = "PieChart";
+
+	$scope.onions = [
+		{v: "Onions"},
+		{v: 3}
+	];
+
+	$scope.timeActivityChart.data = {
+		"cols": [
+			{id: "t", label: "Topping", type: "string"},
+			{id: "s", label: "Slices", type: "number"}
+		], "rows": [
+			{
+				c: [
+					{v: "Mushrooms"},
+					{v: 3}
+				]
+			},
+			{c: $scope.onions},
+			{
+				c: [
+					{v: "Olives"},
+					{v: 31}
+				]
+			},
+			{
+				c: [
+					{v: "Zucchini"},
+					{v: 1}
+				]
+			},
+			{
+				c: [
+					{v: "Pepperoni"},
+					{v: 2}
+				]
+			}
+		]
 	};
 
-	$scope.data = {
-		series: ['Steps per 5 Minutes', 'Calories Burnt'],
-		data: [{
-			x: "00:00",
-			y: [100, 200]
-		}, {
-			x: "06:00",
-			y: [200, 300]
-		}, {
-			x: "12:00",
-			y: [200, 100]
-		}, {
-			x: "18:00",
-			y: [300, 220]
-		}]
+	$scope.timeActivityChart.options = {
+		is3D: true,
+		title: "Time Activity"
 	};
 
-	$scope.data2 = {
-		data: [{
-			x: "Sleep",
-			y: [6],
-			tooltip: "%25"
-		}, {
-			x: "Sedentary",
-			y: [2],
-			tooltip: "%8.3"
-		}, {
-			x: "Lightly Active",
-			y: [6],
-			tooltip: "%25"
-		}, {
-			x: "Fairly Active",
-			y: [4],
-			tooltip: "%16.7"
-		}, {
-			x: "Very Active",
-			y: [6],
-			tooltip: "%25"
-		}]
+	$scope.stepCalorieChart = {};
+
+	$scope.stepCalorieChart.type = "AreaChart";
+
+	$scope.stepCalorieChart.data = {
+		"cols": [
+			{id: "t", label: "Topping", type: "date"},
+			{id: "s", label: "Slices", type: "number"},
+			{id: "a", label: "deneme", type: "number"}
+		], "rows": [
+			{
+				c: [
+					{v: new Date(2016, 2, 13)},
+					{v: 3},
+					{v: 4}
+				]
+			},
+			{
+				c: [
+					{v: new Date(2016, 2, 14)},
+					{v: 2},
+					{v: 3}
+				]
+			},
+			{
+				c: [
+					{v: new Date(2016, 2, 15)},
+					{v: 31},
+					{v: 6}
+				]
+			},
+			{
+				c: [
+					{v: new Date(2016, 3, 13)},
+					{v: 1},
+					{v: 5}
+				]
+			},
+			{
+				c: [
+					{v: new Date(2016, 3, 14)},
+					{v: 2},
+					{v: 12}
+				]
+			}
+		]
 	};
+
+	$scope.stepCalorieChart.options = {
+		title: "Steps and Calories Burnt"
+	};
+
 });

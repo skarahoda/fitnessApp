@@ -5,10 +5,7 @@ html(ng-app='fitnessApp')
 		link(rel='stylesheet', href='/bower_components/bootstrap/dist/css/bootstrap.min.css')
 		link(rel='stylesheet', href='/bower_components/font-awesome/css/font-awesome.min.css')
 		link(rel="stylesheet", href="/bower_components/eonasdan-bootstrap-datetimepicker/build/css/bootstrap-datetimepicker.min.css")
-		script(src='/bower_components/angular/angular.min.js')
-		script(src='/bower_components/angular-route/angular-route.min.js')
-		script(src='/bower_components/d3/d3.min.js')
-		script(src='/bower_components/angular-charts/dist/angular-charts.min.js')
+		link(rel='stylesheet', href='/bower_components/bootstrap-social/bootstrap-social.css')
 
 	body
 		div.row.navbar.navbar-default.navbar-fixed-top
@@ -38,7 +35,7 @@ html(ng-app='fitnessApp')
 								span.caret
 							ul.dropdown-menu
 								li
-									a(href="") User Profile
+									a(href="#/profile") User Profile
 								li
 									a(href="/users/logout") Logout
 		div.ng-view
@@ -48,6 +45,9 @@ html(ng-app='fitnessApp')
 		script(src='/bower_components/moment/min/moment.min.js')
 		script(src='/bower_components/bootstrap/dist/js/bootstrap.min.js')
 		script(src='/bower_components/eonasdan-bootstrap-datetimepicker/build/js/bootstrap-datetimepicker.min.js')
+		script(src='/bower_components/angular/angular.min.js')
+		script(src='/bower_components/angular-route/angular-route.min.js')
+		script(src='/bower_components/angular-google-chart/ng-google-chart.min.js')
 
 		//Angular App
 		script(src='/javascript/angular/app.js')
@@ -55,3 +55,4 @@ html(ng-app='fitnessApp')
 		//Angular Controllers
 		script(src='/javascript/angular/controllers/dashboardController.js')
 		script(src='/javascript/angular/controllers/statusController.js')
+		script(src='/javascript/angular/controllers/profileController.js')

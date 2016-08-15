@@ -1,7 +1,7 @@
 /**
  * Created by skarahoda on 14.08.2016.
  */
-var app = angular.module('fitnessApp', ['ngRoute', 'angularCharts']);
+var app = angular.module('fitnessApp', ['ngRoute', 'googlechart']);
 
 app.config(function ($routeProvider) {
 	$routeProvider
@@ -13,6 +13,10 @@ app.config(function ($routeProvider) {
 		.when('/status', {
 			templateUrl: 'devices/page',
 			controller: 'StatusController'
+		})
+		.when('/profile', {
+			templateUrl: 'users/profile',
+			controller: 'ProfileController'
 		})
 		.otherwise({redirectTo: '/'});
 });
