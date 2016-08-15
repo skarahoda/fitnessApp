@@ -1,0 +1,40 @@
+div.row
+	div.col-md-4.col-sm-2
+	div(style="padding-top:10px; padding-bottom:10px; margin-top:30px;").col-md-4.col-sm-8.col-xs-12.jumbotron
+		div.row
+			h3(style="margin-top: 0px; margin-bottom: 0px; padding-left: 10px;") Profile
+		div(style="padding-bottom:20px; padding-top:20px").row
+			div.form-group
+				div.col-xs-12
+					div(style="padding-right: 5px;").col-xs-3
+						h5 Enter Name:
+					div.col-xs-9
+						input(type="text", ng-model="user.name").form-control
+			div.form-group
+				div.col-xs-12
+					div(style="padding-right: 5px;").col-xs-3
+						h5 Enter Gender:
+					div.col-xs-9
+						input(type="text", ng-model="user.gender").form-control
+			div.form-group
+				div.col-xs-12
+					div(style="padding-right: 5px;").col-xs-3
+						h5 Enter Height:
+					div.col-xs-9
+						input(type="text", ng-model="user.height").form-control
+			div.form-group
+				div.col-xs-12
+					div(style="padding-right: 5px;").col-xs-3
+						h5 Enter Weight:
+					div.col-xs-9.-align-center
+						input(type="text", ng-model="user.weight").form-control
+			div.form-group
+				div.col-xs-12
+					div(style="padding-right: 5px;").col-xs-3
+						h5 Connected With:
+					div.col-xs-9.-align-center
+						div(style="padding-left: 0px; padding-right: 0px;")
+							a(href="", style="pointer-events:none").btn.btn-social.btn-block.btn-facebook
+								span.fa.fa-facebook
+								| facebook
+	div.col-md-4.col-sm-2
