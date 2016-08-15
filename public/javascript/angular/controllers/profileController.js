@@ -6,15 +6,8 @@ angular.module('fitnessApp').controller('ProfileController', ['$scope', 'profile
 
 	var myInfoService = benchDetailService.myInfo();
 	myInfoService.save({}, function (info) {
-		console.log(info);
+		$scope.user = info;
 	}, function (status) {
 
 	});
-	$scope.user = {
-		name: "Berk Çirişci",
-		gender: "Male",
-		height: "1.80 m",
-		weight: "72 kg"
-	};
-
 }]);

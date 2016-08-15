@@ -21,20 +21,20 @@ div.row
 					div(style="padding-right: 5px;").col-xs-3
 						h5 Enter Height:
 					div.col-xs-9
-						input(type="text", ng-model="user.height").form-control
+						input(type="number", ng-model="user.height").form-control
 			div.form-group
 				div.col-xs-12
 					div(style="padding-right: 5px;").col-xs-3
 						h5 Enter Weight:
 					div.col-xs-9.-align-center
-						input(type="text", ng-model="user.weight").form-control
+						input(type="number", ng-model="user.weight").form-control
 			div.form-group
 				div.col-xs-12
 					div(style="padding-right: 5px;").col-xs-3
 						h5 Connected With:
 					div.col-xs-9.-align-center
 						div(style="padding-left: 0px; padding-right: 0px;")
-							a(href="", style="pointer-events:none").btn.btn-social.btn-block.btn-facebook
-								span.fa.fa-facebook
-								| facebook
+							a(href="", style="pointer-events:none", ng-class="{'btn-facebook':!user.isGoogleConnected,'btn-google':user.isGoogleConnected}").btn.btn-social.btn-block.btn-facebook
+								span(ng-class="{'fa-facebook':!user.isGoogleConnected,'fa-google':user.isGoogleConnected}").fa
+								| {{user.isGoogleConnected ? 'Google' : 'facebook'}}
 	div.col-md-4.col-sm-2
