@@ -9,6 +9,12 @@ angular.module('fitnessApp')
 					{
 						save: {method: 'POST', isArray: false}
 					});
+			},
+			update: function () {
+				return $resource('/users/update', {},
+					{
+						save: {method: 'POST', isArray: false}
+					});
 			}
 		}
 	}]);

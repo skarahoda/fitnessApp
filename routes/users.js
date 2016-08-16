@@ -12,17 +12,6 @@ router.get('/login', function (req, res) {
 	res.render('login');
 });
 
-/* GET login page. */
-router.post('/myInfo', isLoggedIn, function (req, res) {
-	res.status(200).json({
-		name: req.user.name,
-		id: req.user.id,
-		weight: req.user.weight,
-		height: req.user.height,
-		isGoogleConnected: req.user.google != null
-	});
-});
-
 // route for showing the profile page
 router.get('/profile', isLoggedIn, function (req, res) {
 	res.render('profile');
@@ -32,6 +21,37 @@ router.get('/profile', isLoggedIn, function (req, res) {
 router.get('/logout', function (req, res) {
 	req.logout();
 	res.redirect('/');
+});
+
+/* POST user info. */
+router.post('/myInfo', isLoggedIn, function (req, res) {
+	res.status(200).json({
+		name: req.user.name,
+		id: req.user.id,
+		weight: req.user.weight,
+		height: req.user.height,
+		isGoogleConnected: (req.user.google.id != null)
+	});
+});
+
+/* POST user info. */
+router.post('/update', isLoggedIn, function (req, res) {
+	req.user.name = req.body.name;
+	req.user.weight = req.body.weight;
+	req.user.height = req.body.height;
+
+	req.user.save(function (err, user) {
+		if (err) {
+			res.status(500).send(err)
+		}
+		res.status(200).json({
+			name: user.name,
+			id: user.id,
+			weight: user.weight,
+			height: user.height,
+			isGoogleConnected: (user.google.id != null)
+		});
+	});
 });
 
 module.exports = function (passport) {
