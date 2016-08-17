@@ -91,4 +91,23 @@ router.post('/stepCalorieInfo', isLoggedIn, function (req, res) {
 	res.status(200).json(result);
 });
 
+router.post('/totalActivityInfo', isLoggedIn, function (req, res) {
+	console.log(req.body);
+	var result = {
+		step: {
+			completed: 5000,
+			goal: 10000
+		},
+		distance: {
+			completed: 2000,
+			goal: 5000
+		},
+		calorie: {
+			completed: 3000,
+			goal: 4000
+		}
+	};
+	res.status(200).json(result);
+});
+
 module.exports = router;

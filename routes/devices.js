@@ -10,8 +10,7 @@ router.get('/page', isLoggedIn, function (req, res) {
 router.post('/info', isLoggedIn, function (req, res) {
 	var result = {
 		name: 'iPad',
-		connectionTime: moment().unix() - 24 * 60 * 60,
-		type: 'Wristband',
+		connectionTime: moment().unix() - 8 * 24 * 60 * 60,
 		battery: {
 			percent: 20,
 			life: 5

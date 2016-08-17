@@ -20,3 +20,10 @@ app.config(function ($routeProvider) {
 		})
 		.otherwise({redirectTo: '/'});
 });
+
+app.controller('mainController', ['$scope', 'deviceService', function ($scope, deviceService) {
+	var serviceFind = deviceService.findDevice();
+	$scope.onClickFind = function () {
+		serviceFind.save({})
+	}
+}]);

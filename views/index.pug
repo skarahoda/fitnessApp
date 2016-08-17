@@ -9,7 +9,7 @@ html(ng-app='fitnessApp')
 
 	body
 		div.row.navbar.navbar-default.navbar-fixed-top
-			div.container
+			div(ng-controller='mainController').container
 				div.navbar-header
 					button(type="button", data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar").navbar-toggle.collapsed
 						span.sr-only Toggle navigation
@@ -21,7 +21,7 @@ html(ng-app='fitnessApp')
 				div(id="navbar").navbar-collapse.collapse.text-center
 					ul.nav.navbar-nav.navbar-right
 						li
-							a(href="").btn.btn-block
+							a(href="", ng-click='onClickFind()').btn.btn-block
 								span(style="padding-right: 5px").fa.fa-mobile-phone
 								| Find it
 						li
@@ -58,3 +58,4 @@ html(ng-app='fitnessApp')
 		script(src='/javascript/angular/controllers/statusController.js')
 		script(src='/javascript/angular/controllers/profileController.js')
 		script(src='/javascript/angular/services/profileService.js')
+		script(src='/javascript/angular/services/deviceService.js')
