@@ -9,7 +9,7 @@ div.row
 					div(style="padding-right: 5px;").col-xs-3
 						h5 Enter Name:
 					div.col-xs-9
-						input(type="text", ng-model="user.name", ng-change="userChanged()").form-control
+						input(type="text", ng-model="user.name", ng-blur="userChanged()").form-control
 			div.form-group
 				div.col-xs-12
 					div(style="padding-right: 5px;").col-xs-3
@@ -21,13 +21,13 @@ div.row
 					div(style="padding-right: 5px;").col-xs-3
 						h5 Enter Height:
 					div.col-xs-9
-						input(type="number", ng-model="user.height", ng-change="userChanged()").form-control
+						input(type="number", ng-model="user.height", ng-blur="userChanged()").form-control
 			div.form-group
 				div.col-xs-12
 					div(style="padding-right: 5px;").col-xs-3
 						h5 Enter Weight:
 					div.col-xs-9.-align-center
-						input(type="number", ng-model="user.weight", ng-change="userChanged()").form-control
+						input(type="number", ng-model="user.weight", ng-blur="userChanged()").form-control
 			div.form-group
 				div.col-xs-12
 					div(style="padding-right: 5px;").col-xs-3

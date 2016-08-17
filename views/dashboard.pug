@@ -3,7 +3,7 @@ div(style="padding-top: 15px;").container
 		div.-header.col-sm-2.col-xs-12
 			h3(style="margin-top: 10px; margin-bottom: 10px;") Activity
 		div.col-sm-4.col.xs-12
-		div.hidden.col-sm-6
+		div(ng-class = "{'hidden':intervalStatus != 4}").col-sm-6
 			div.col-sm-6.col-xs-12
 				div(style="margin-bottom: 7px; margin-top: 7px;").form-group
 					div(id = "datePickerStart").input-group.date
@@ -40,7 +40,7 @@ div(style="padding-top: 15px;").container
 			div.col.xs-10
 				h3(style="margin-top: 10px;")
 					span(style="font-size=%95").text-success 3.35
-					span(style="font-size=%95")  miles traveled
+					span(style="font-size=%95")  km traveled
 					span(style="font-size=%95").text-success  today
 		div.col-sm-6.col-xs-12
 			div(style="height: 30px;").progress
@@ -77,13 +77,13 @@ div.row.navbar.navbar-default.navbar-fixed-bottom
 
 		div(id="navbar2", ng-mouseover="navbar2").navbar-collapse.collapse
 			ul.nav.navbar-nav.navbar-right
-				li.active
+				li(ng-class = "{'active':intervalStatus == 0}", ng-click = "statusChange(0)")
 					a(href="").btn.btn-block Last Day
-				li
+				li(ng-class = "{'active':intervalStatus == 1}", ng-click = "statusChange(1)")
 					a(href="").btn.btn-block Last Week
-				li
+				li(ng-class = "{'active':intervalStatus == 2}", ng-click = "statusChange(2)")
 					a(href="").btn.btn-block Last Month
-				li
+				li(ng-class = "{'active':intervalStatus == 3}", ng-click = "statusChange(3)")
 					a(href="").btn.btn-block Last Year
-				li
+				li(ng-class = "{'active':intervalStatus == 4}", ng-click = "statusChange(4)")
 					a(href="").btn.btn-block Custom

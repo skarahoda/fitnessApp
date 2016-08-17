@@ -3,9 +3,33 @@
  */
 angular.module('fitnessApp').controller('DashboardController', function ($scope) {
 
-	$scope.timeActivityChart = {};
+	function initialize() {
+		$scope.timeActivityChart = {};
+		$scope.timeActivityChart.type = "PieChart";
 
-	$scope.timeActivityChart.type = "PieChart";
+		$(function () {
+			var startPicker = $('#datePickerStart');
+			var endPicker = $('#datePickerEnd');
+			startPicker.datetimepicker({
+				format: 'DD MMMM YYYY',
+				defaultDate: 'now'
+			});
+			endPicker.datetimepicker({
+				format: 'DD MMMM YYYY',
+				useCurrent: false, //Important! See issue #1075
+				maxDate: 'now',
+				defaultDate: 'now'
+			});
+			startPicker.on("dp.change", function (e) {
+				$('#datePickerEnd').data("DateTimePicker").minDate(e.date);
+			});
+			endPicker.on("dp.change", function (e) {
+				$('#datePickerStart').data("DateTimePicker").maxDate(e.date);
+			});
+		});
+	}
+
+	initialize();
 
 	$scope.onions = [
 		{v: "Onions"},
@@ -101,5 +125,13 @@ angular.module('fitnessApp').controller('DashboardController', function ($scope)
 	$scope.stepCalorieChart.options = {
 		title: "Steps and Calories Burnt"
 	};
+
+	$scope.intervalStatus = 0;
+
+	$scope.statusChange = function (intervalStatus) {
+		$scope.intervalStatus = intervalStatus;
+
+	}
+
 
 });
