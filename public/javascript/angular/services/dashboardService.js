@@ -5,19 +5,19 @@ angular.module('fitnessApp')
 	.factory('dashboardService', ['$resource', function ($resource) {
 		return {
 			totalActivityInfo: function () {
-				return $resource('/dashboard/totalActivity', {},
+				return $resource('/dashboard/totalActivityInfo', {},
 					{
 						save: {method: 'POST', isArray: false}
 					});
 			},
 			stepCalorieInfo: function () {
-				return $resource('/devices/stepCalorieInfo', {},
+				return $resource('/dashboard/stepCalorieInfo', {},
 					{
 						save: {method: 'POST', isArray: false}
 					});
 			},
 			timeActivityInfo: function () {
-				return $resource('/devices/timeActivityInfo', {},
+				return $resource('/dashboard/timeActivityInfo', {},
 					{
 						save: {method: 'POST', isArray: false}
 					});

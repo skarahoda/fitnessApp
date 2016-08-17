@@ -8,14 +8,14 @@ div(style="padding-top: 15px;").container
 				div(style="margin-bottom: 7px; margin-top: 7px;").form-group
 					div(id = "datePickerStart").input-group.date
 						span(style="cursor:default").input-group-addon From:
-						input(type="text").form-control
+						input(type="text").form-control#textStartDate
 						span.input-group-addon
 							span.fa.fa-calendar
 			div.col-sm-6.col-xs-12
 				div(style="margin-bottom: 7px; margin-top: 7px;").form-group
 					div(id = "datePickerEnd").input-group.date
 						span(style="cursor:default").input-group-addon To:
-						input(type="text").form-control
+						input(type="text").form-control#textEndDate
 						span.input-group-addon
 							span.fa.fa-calendar
 	div.row
@@ -31,7 +31,7 @@ div(style="padding-top: 15px;").container
 			div(style="height: 30px;").progress
 				div(role="progressbar" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100"
 				style="width:75%").progress-bar.progress-bar-striped.progress-bar-primary.active
-					span(style="line-height: 29px;") %75 of goal 10.000
+					span(style="line-height: 29px;") {{totalActivity.step.text}}
 
 	div.row
 		div.col-sm-6.col-xs-12
@@ -46,7 +46,7 @@ div(style="padding-top: 15px;").container
 			div(style="height: 30px;").progress
 				div(role="progressbar" aria-valuenow="67" aria-valuemin="0" aria-valuemax="100"
 				style="width:67%").progress-bar.progress-bar-striped.progress-bar-success.active
-					span(style="line-height: 29px;") %67 of goal 5.000
+					span(style="line-height: 29px;") {{totalActivity.distance.text}}
 
 	div.row
 		div.col-sm-6.col-xs-12
@@ -58,9 +58,8 @@ div(style="padding-top: 15px;").container
 					span(style="font-size=%95")  calories burned
 		div.col-sm-6.col-xs-12
 			div(style="height: 30px;").progress
-				div(role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"
-				style="width:100%").progress-bar.progress-bar-striped.progress-bar-danger.active
-					span(style="line-height: 29px;") %100 of goal 2.184
+				div(role="progressbar" aria-valuenow="{{totalActivity.calorie.completed}}" aria-valuemin="0" aria-valuemax="{{totalActivity.calorie.goal}}").progress-bar.progress-bar-striped.progress-bar-danger.active
+					span(style="line-height: 29px;") {{totalActivity.calorie.text}}
 	div.row
 		div.col-sm-6.col-xs-12
 			div(google-chart chart="stepCalorieChart" style="height:600px; width:%100")
