@@ -4,6 +4,7 @@
 // load all the things we need
 var FacebookStrategy = require('passport-facebook').Strategy;
 var GoogleStrategy = require('passport-google-oauth2').Strategy;
+var LocalStrategy = require('passport-local').Strategy;
 
 // load up the user model
 var User = require('../models/user');
@@ -24,7 +25,8 @@ module.exports = function (passport) {
 			done(err, user);
 		});
 	});
-// =========================================================================
+
+	// =========================================================================
 	// LOCAL LOGIN =============================================================
 	// =========================================================================
 	// we are using named strategies since we have one for login and one for signup
@@ -32,8 +34,7 @@ module.exports = function (passport) {
 
 	passport.use('local-login', new LocalStrategy({
 			// by default, local strategy uses username and password, we will override with email
-			usernameField: 'email',
-			passwordField: 'password',
+			idField: 'id',
 			passReqToCallback: true // allows us to pass back the entire request to the callback
 		},
 		function (req, id, done) { // callback with email and password from our form
