@@ -24,6 +24,15 @@ var userSchema = mongoose.Schema({
 		token: String,
 		email: String,
 		name: String
+	},
+	workouts: [{type: mongoose.Schema.Types.ObjectId, ref: 'Workout'}],
+	device: {
+		connectionTime: Number,
+		name: String,
+		battery: {
+			percent: Number,
+			life: Number
+		}
 	}
 });
 
