@@ -72,6 +72,9 @@ angular.module('fitnessApp')
 				$scope.totalActivity.step.text = '%' + (step.completed * 100 / step.goal).toFixed(0) + ' of goal ' + step.goal;
 				$scope.totalActivity.distance.text = '%' + (distance.completed * 100 / distance.goal).toFixed(0) + ' of goal ' + distance.goal;
 				$scope.totalActivity.calorie.text = '%' + (calorie.completed * 100 / calorie.goal).toFixed(0) + ' of goal ' + calorie.goal;
+				$scope.totalActivity.step.completed = $scope.totalActivity.step.completed.toFixed(0);
+				$scope.totalActivity.distance.completed = $scope.totalActivity.distance.completed.toFixed(0);
+				$scope.totalActivity.calorie.completed = $scope.totalActivity.calorie.completed.toFixed(0);
 			});
 			serviceTime.save(request, function (info) {
 				$scope.timeActivityChart.data = {
@@ -89,7 +92,7 @@ angular.module('fitnessApp')
 				$scope.stepCalorieChart.data = {
 					cols: [
 						{id: "t", label: "Time", type: "date"},
-						{id: "s", label: "Steps per five minute", type: "number"},
+						{id: "s", label: "Steps per five seconds", type: "number"},
 						{id: "c", label: "Calorie Burned", type: "number"}
 					],
 					rows: info
@@ -101,7 +104,8 @@ angular.module('fitnessApp')
 		$scope.statusChange = function (intervalStatus) {
 			$scope.intervalStatus = intervalStatus;
 			fillUI();
-		}
+		};
 
+		setInterval(fillUI, 5000);
 
 	}]);

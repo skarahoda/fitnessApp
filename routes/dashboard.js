@@ -3,7 +3,7 @@ var router = express.Router();
 var isLoggedIn = require('./isLoggedIn');
 var moment = require('moment');
 var Workout = require('../models/workout');
-var dist = require('geo-distance-js');
+var geolib = require('geolib');
 /* GET home page. */
 router.get('/page', isLoggedIn, function (req, res) {
 	res.render('dashboard');
@@ -30,7 +30,7 @@ router.post('/timeActivityInfo', isLoggedIn, function (req, res) {
 	Workout.find({
 		'userId': req.user.id,
 		'start': {$lt: end},
-		'end': {$lt: start}
+		'end': {$gt: start}
 	}, function (err, workouts) {
 		if (err)
 			res.status(400).json({});
@@ -41,8 +41,10 @@ router.post('/timeActivityInfo', isLoggedIn, function (req, res) {
 		var workoutLength = workouts.length;
 		for (var i = 0; i < workoutLength; i++) {
 			var workout = workouts[i];
-			if (workout.start < end)
-				workout.start = end;
+			if (workout.start < start)
+				workout.start = start;
+			if (workout.end > end)
+				workout.end = end;
 			var speed = workout.distance / (workout.end - workout.start);
 			if (speed <= 2)
 				light += (workout.end - workout.start);
@@ -100,11 +102,11 @@ router.post('/stepCalorieInfo', isLoggedIn, function (req, res) {
 		}
 		start = end - timeDiff;
 	}
-	var result = [];
+	var results = [];
 	Workout.find({
 		'userId': req.user.id,
 		'start': {$lt: end},
-		'end': {$lt: start}
+		'end': {$gt: start}
 	}, function (err, workouts) {
 		if (err)
 			res.status(400).json([]);
@@ -113,34 +115,45 @@ router.post('/stepCalorieInfo', isLoggedIn, function (req, res) {
 		var workoutLength = workouts.length;
 		var walkingFactor = 0.57;
 		var caloriesBurntPerMile = walkingFactor * (req.user.weight * 2.2);
-		var strip = req.user.height * 0.415;
+		var strip = req.user.height * 0.415 / 100;
 		for (var i = 1; i < workoutLength; i++) {
 			points = workouts[i].points;
 			var pointsLength = points.length;
+			var pointB = {};
 			if (pointsLength > 0) {
 
 				result = {
 					c: [
-						{v: points[i].timeStamp},
+						{v: points[0].timeStamp},
 						{v: 0},
 						{v: 0}
 					]
 				};
 				results.push(result);
+				pointB = {
+					latitude: points[0].latitude,
+					longitude: points[0].longitude
+				};
 			}
 			var calorieBurnt = 0;
-			for (var j = 1; i < pointsLength; j++) {
-				var distance = dist.getDistance(points[j].latitude, points[j].longitude, points[j - 1].latitude, points[j - 1].longitude);
+			for (var j = 1; j < pointsLength; j++) {
+				var pointA = {
+					latitude: points[j].latitude,
+					longitude: points[j].longitude
+				};
+
+				var distance = geolib.getDistance(pointA, pointB);
 				calorieBurnt += distance * caloriesBurntPerMile / 1609.344;
-				var stepPer5Min = distance * 60 * 5 / (strip * (points[j].timeStamp - points[j - 1].timeStamp));
+				var stepPer5Second = distance * 5 / (strip * (points[j].timeStamp - points[j - 1].timeStamp));
 				result = {
 					c: [
 						{v: points[j].timeStamp},
-						{v: stepPer5Min},
+						{v: stepPer5Second},
 						{v: calorieBurnt}
 					]
 				};
 				results.push(result);
+				pointB = pointA;
 			}
 			if (pointsLength > 1) {
 				result = {
@@ -153,8 +166,8 @@ router.post('/stepCalorieInfo', isLoggedIn, function (req, res) {
 				results.push(result);
 			}
 		}
+		res.status(200).json(results);
 	});
-	res.status(200).json(result);
 });
 
 router.post('/totalActivityInfo', isLoggedIn, function (req, res) {
@@ -180,7 +193,7 @@ router.post('/totalActivityInfo', isLoggedIn, function (req, res) {
 		{$match: {
 			'userId': req.user.id,
 			'start': {$lt: end},
-			'end': {$lt: start}
+			'end': {$gt: start}
 		}},
 		{ $group: {
 			_id: '$userId',
@@ -195,21 +208,21 @@ router.post('/totalActivityInfo', isLoggedIn, function (req, res) {
 		var step = 0;
 		if (results.length > 0) {
 			distance = results[0].totalDistance;
-			step = distance / (req.user.height * 0.415);
+			step = distance * 100 / (req.user.height * 0.415);
 			calorie = distance * 0.57 * (req.user.weight * 2.2) / 1609.344;
 		}
 		var result = {
 			step: {
 				completed: step,
-				goal: dayDifference * 10000
+				goal: dayDifference * 5000
 			},
 			distance: {
 				completed: distance,
-				goal: dayDifference * 5000
+				goal: dayDifference * 3000
 			},
 			calorie: {
 				completed: calorie,
-				goal: dayDifference * 35000
+				goal: dayDifference * 200
 			}
 		};
 		res.status(200).json(result);
