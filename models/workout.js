@@ -7,12 +7,12 @@ var mongoose = require('mongoose');
 
 // define the schema for our user model
 var userSchema = mongoose.Schema({
-	start: {type: Date, default: Date.now},
-	end: {type: Date, default: Date.now},
+	start: Number,
+	end: Number,
 	points: [{
 		latitude: Number,
 		longitude: Number,
-		timeStamp: {type: Date, default: Date.now}
+		timeStamp: Number,
 	}]
 });
 
