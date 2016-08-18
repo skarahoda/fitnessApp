@@ -8,6 +8,7 @@ var mongoose = require('mongoose');
 // define the schema for our user model
 var userSchema = mongoose.Schema({
 	userId: String,
+	distance: Number,
 	start: Number,
 	end: Number,
 	points: [{
