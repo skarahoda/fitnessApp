@@ -43,8 +43,8 @@ router.post('/stepCalorieInfo', isLoggedIn, function (req, res) {
 	var start;
 	var end = moment().unix();
 	if (req.body.intervalType == 4) {
-		start = req.body.start;
-		end = req.body.end;
+		start = req.body.from;
+		end = req.body.to;
 	}
 	else {
 		var timeDiff = 24 * 60 * 60;
@@ -52,7 +52,7 @@ router.post('/stepCalorieInfo', isLoggedIn, function (req, res) {
 			timeDiff *= 7;
 		} else if (req.body.intervalType == 2) {
 			timeDiff *= 30;
-		} else if (req.body.intervalType > 3) {
+		} else if (req.body.intervalType == 3) {
 			timeDiff *= 365;
 		}
 		start = end - timeDiff;
@@ -62,6 +62,10 @@ router.post('/stepCalorieInfo', isLoggedIn, function (req, res) {
 		'start': {$lt: end},
 		'end': {$lt: start}
 	}, function (workouts) {
+		var workoutlength = workouts.length;
+		for (var i = 0; i < workoutlength; i++) {
+
+		}
 	});
 	var result = [
 		{
