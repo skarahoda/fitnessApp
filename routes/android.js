@@ -54,10 +54,11 @@ router.post('/startWorkout', function (req, res) {
 			workout = new Workout();
 			workout.start = req.body.timeStamp;
 			workout.end = req.body.timeStamp;
+			workout.userId = req.body.userId;
 			workout.save();
 
 			user.workouts.push(workout);
-			user.save(function (err, user) {
+			user.save(function (err) {
 				if (err) {
 					res.status(500).send(err)
 				}
@@ -74,7 +75,7 @@ router.post('/stopWorkout', function (req, res) {
 			res.status('400').json({});
 		else {
 			workout.end = req.body.timeStamp;
-			workout.save(function (err, user) {
+			workout.save(function (err) {
 				if (err) {
 					res.status(500).send(err)
 				}
@@ -95,7 +96,7 @@ router.post('/addWorkoutPoint', function (req, res) {
 				longitude: req.body.longitude,
 				timeStamp: req.body.timeStamp
 			});
-			workout.save(function (err, user) {
+			workout.save(function (err) {
 				if (err) {
 					res.status(500).send(err)
 				}
@@ -119,8 +120,8 @@ router.post('/deviceInfo', function (req, res) {
 					percent: req.body.percent
 				}
 
-			}
-			user.save(function (err, user) {
+			};
+			user.save(function (err) {
 				if (err) {
 					res.status(500).send(err)
 				}

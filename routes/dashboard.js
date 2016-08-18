@@ -39,7 +39,13 @@ router.post('/timeActivityInfo', isLoggedIn, function (req, res) {
 });
 
 router.post('/stepCalorieInfo', isLoggedIn, function (req, res) {
-	console.log(req.body);
+	var workouts = req.user.workouts;
+	workouts.find({
+		'userId': req.user.id
+	}, function (workouts) {
+		callback("", workouts);
+	});
+
 	var result = [
 		{
 			c: [
