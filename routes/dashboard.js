@@ -100,14 +100,14 @@ router.post('/stepCalorieInfo', isLoggedIn, function (req, res) {
 		}
 		start = end - timeDiff;
 	}
+	var result = [];
 	Workout.find({
 		'userId': req.user.id,
 		'start': {$lt: end},
 		'end': {$lt: start}
 	}, function (err, workouts) {
 		if (err)
-			res.status(400).json({});
-		var results = [];
+			res.status(400).json([]);
 		var result;
 		var points;
 		var workoutLength = workouts.length;
@@ -154,43 +154,6 @@ router.post('/stepCalorieInfo', isLoggedIn, function (req, res) {
 			}
 		}
 	});
-	var result = [
-		{
-			c: [
-				{v: moment([2016, 2, 13]).unix()},
-				{v: 3},
-				{v: 4}
-			]
-		},
-		{
-			c: [
-				{v: moment([2016, 2, 14]).unix()},
-				{v: 2},
-				{v: 3}
-			]
-		},
-		{
-			c: [
-				{v: moment([2016, 2, 15]).unix()},
-				{v: 31},
-				{v: 6}
-			]
-		},
-		{
-			c: [
-				{v: moment([2016, 3, 13]).unix()},
-				{v: 1},
-				{v: 5}
-			]
-		},
-		{
-			c: [
-				{v: moment([2016, 3, 14]).unix()},
-				{v: 2},
-				{v: 12}
-			]
-		}
-	];
 	res.status(200).json(result);
 });
 
@@ -212,21 +175,19 @@ router.post('/totalActivityInfo', isLoggedIn, function (req, res) {
 		}
 		start = end - timeDiff;
 	}
-	var dayDifference = ((end - start) / (24 * 60 * 60)).toPrecision(0);
-	Workout.aggregate([{
-		$match: {
+	var dayDifference = ((end - start) / (24 * 60 * 60)).toPrecision(1);
+	Workout.aggregate([
+		{$match: {
 			'userId': req.user.id,
 			'start': {$lt: end},
 			'end': {$lt: start}
-		},
-		$group: {
+		}},
+		{ $group: {
 			_id: '$userId',
 			totalDistance: {
 				$sum: '$distance'
 			}
-		}
-	}
-	], function (err, results) {
+		}}], function (err, results) {
 		if (err)
 			res.status(400).json({});
 		var distance = 0;

@@ -75,6 +75,7 @@ router.post('/stopWorkout', function (req, res) {
 			res.status('400').json({});
 		else {
 			workout.end = req.body.timeStamp;
+			workout.distance = req.body.distance;
 			workout.save(function (err) {
 				if (err) {
 					res.status(500).send(err)
