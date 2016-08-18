@@ -2,6 +2,7 @@ var express = require('express');
 var router = express.Router();
 var isLoggedIn = require('./isLoggedIn');
 var moment = require('moment');
+var Workout = require('../models/workout');
 /* GET home page. */
 router.get('/page', isLoggedIn, function (req, res) {
 	res.render('dashboard');
@@ -56,14 +57,11 @@ router.post('/stepCalorieInfo', isLoggedIn, function (req, res) {
 		}
 		start = end - timeDiff;
 	}
-	
-	var workouts = req.user.workouts;
-	workouts.find({
+	Workout.find({
 		'userId': req.user.id,
 		'start': {$lt: end},
 		'end': {$lt: start}
 	}, function (workouts) {
-		callback("", workouts);
 	});
 	var result = [
 		{
