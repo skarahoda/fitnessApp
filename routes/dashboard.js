@@ -59,11 +59,12 @@ router.post('/stepCalorieInfo', isLoggedIn, function (req, res) {
 	
 	var workouts = req.user.workouts;
 	workouts.find({
-		'userId': req.user.id
+		'userId': req.user.id,
+		'start': {$lt: end},
+		'end': {$lt: start}
 	}, function (workouts) {
 		callback("", workouts);
 	});
-	console.log(req.body);
 	var result = [
 		{
 			c: [
