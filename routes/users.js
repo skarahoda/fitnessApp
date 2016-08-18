@@ -57,6 +57,10 @@ router.post('/update', isLoggedIn, function (req, res) {
 module.exports = function (passport) {
 
 
+	app.post('/android', passport.authenticate('local-login'), function (req, res) {
+		res.status(200).json({});
+	});
+
 	// =====================================
 	// FACEBOOK ROUTES =====================
 	// =====================================
