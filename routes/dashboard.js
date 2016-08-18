@@ -3,6 +3,7 @@ var router = express.Router();
 var isLoggedIn = require('./isLoggedIn');
 var moment = require('moment');
 var Workout = require('../models/workout');
+var dist = require('geo-distance-js');
 /* GET home page. */
 router.get('/page', isLoggedIn, function (req, res) {
 	res.render('dashboard');
@@ -108,25 +109,33 @@ router.post('/stepCalorieInfo', isLoggedIn, function (req, res) {
 		var result;
 		var points;
 		var workoutLength = workouts.length;
-		for (var i = 0; i < workoutLength; i++) {
+		var walkingFactor = 0.57;
+		var caloriesBurntPerMile = walkingFactor * (req.user.weight * 2.2);
+		var strip = req.user.height * 0.415;
+		for (var i = 1; i < workoutLength; i++) {
 			points = workouts[i].points;
 			var pointsLength = points.length;
 			if (pointsLength > 0) {
+
 				result = {
 					c: [
-						{v: points[0].timeStamp},
+						{v: points[i].timeStamp},
 						{v: 0},
 						{v: 0}
 					]
 				};
 				results.push(result);
 			}
+			var calorieBurnt = 0;
 			for (var j = 1; i < pointsLength; j++) {
+				var distance = dist.getDistance(points[j].latitude, points[j].longitude, points[j - 1].latitude, points[j - 1].longitude);
+				calorieBurnt += distance * caloriesBurntPerMile / 1609.344;
+				var stepPer5Min = distance * 60 * 5 / (strip * (points[j].timeStamp - points[j - 1].timeStamp));
 				result = {
 					c: [
 						{v: points[j].timeStamp},
-						{v: 0},
-						{v: 0}
+						{v: stepPer5Min},
+						{v: calorieBurnt}
 					]
 				};
 				results.push(result);
