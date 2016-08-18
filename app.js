@@ -9,6 +9,7 @@ var passport = require('passport');
 var session = require('express-session');
 
 var dashboard = require('./routes/dashboard');
+var android = require('./routes/android');
 var devices = require('./routes/devices');
 var index = require('./routes/index');
 var users = require('./routes/users');
@@ -45,6 +46,7 @@ app.use(passport.session());
 
 app.use('/', index);
 app.use('/dashboard', dashboard);
+app.use('/android', android);
 app.use('/devices', devices);
 app.use('/users', users(passport));
 
