@@ -27,11 +27,11 @@ var userSchema = mongoose.Schema({
 	},
 	workouts: [{type: mongoose.Schema.Types.ObjectId, ref: 'Workout'}],
 	device: {
-		connectionTime: Number,
-		name: String,
+		connectionTime: {type: Number, default: 0},
+		name: {type: String, default: 'My lovely device'},
 		battery: {
-			percent: Number,
-			life: Number
+			percent: {type: Number, default: 0},
+			life: {type: Number, default: 0}
 		}
 	}
 });
