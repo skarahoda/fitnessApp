@@ -9,34 +9,76 @@ router.get('/page', isLoggedIn, function (req, res) {
 });
 
 router.post('/timeActivityInfo', isLoggedIn, function (req, res) {
-	console.log(req.body);
-	var result = [
-		{
-			c: [
-				{v: "No activity"},
-				{v: 10}
-			]
-		},
-		{
-			c: [
-				{v: "Light Activity"},
-				{v: 5}
-			]
-		},
-		{
-			c: [
-				{v: "Normal Activity"},
-				{v: 2}
-			]
-		},
-		{
-			c: [
-				{v: "Intense Activity"},
-				{v: 7}
-			]
+	var start;
+	var end = moment().unix();
+	if (req.body.intervalType == 4) {
+		start = req.body.from;
+		end = req.body.to;
+	}
+	else {
+		var timeDiff = 24 * 60 * 60;
+		if (req.body.intervalType == 1) {
+			timeDiff *= 7;
+		} else if (req.body.intervalType == 2) {
+			timeDiff *= 30;
+		} else if (req.body.intervalType == 3) {
+			timeDiff *= 365;
 		}
-	];
-	res.status(200).json(result);
+		start = end - timeDiff;
+	}
+	Workout.find({
+		'userId': req.user.id,
+		'start': {$lt: end},
+		'end': {$lt: start}
+	}, function (err, workouts) {
+		if (err)
+			res.status(400).json({});
+		var light = 0;
+		var normal = 0;
+		var intense = 0;
+		var notActive;
+		var workoutLength = workouts.length;
+		for (var i = 0; i < workoutLength; i++) {
+			var workout = workouts[i];
+			if (workout.start < end)
+				workout.start = end;
+			var speed = workout.distance / (workout.end - workout.start);
+			if (speed <= 2)
+				light += (workout.end - workout.start);
+			else if (speed <= 4)
+				normal += (workout.end - workout.start);
+			else
+				intense += (workout.end - workout.start);
+		}
+		notActive = (end - start) - (light + normal + intense);
+		var result = [
+			{
+				c: [
+					{v: "No activity"},
+					{v: notActive / (60 * 60)}
+				]
+			},
+			{
+				c: [
+					{v: "Light Activity"},
+					{v: light / (60 * 60)}
+				]
+			},
+			{
+				c: [
+					{v: "Normal Activity"},
+					{v: normal / (60 * 60)}
+				]
+			},
+			{
+				c: [
+					{v: "Intense Activity"},
+					{v: intense / (60 * 60)}
+				]
+			}
+		];
+		res.status(200).json(result);
+	});
 });
 
 router.post('/stepCalorieInfo', isLoggedIn, function (req, res) {
