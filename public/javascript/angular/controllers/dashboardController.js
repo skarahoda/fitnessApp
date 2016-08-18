@@ -59,8 +59,10 @@ angular.module('fitnessApp')
 			if ($scope.intervalStatus == 4) {
 				var textStartDate = $('#textStartDate').val();
 				var textEndDate = $('#textEndDate').val();
-				request.from = moment(textStartDate, 'DD MMMM YYYY').unix();
-				request.to = moment(textEndDate, 'DD MMMM YYYY').unix();
+				var start = moment(textStartDate, 'DD MMMM YYYY').second(0).minute(0).hour(0);
+				var end = moment(textEndDate, 'DD MMMM YYYY').second(59).minute(59).hour(23);
+				request.from = start.unix();
+				request.to = end.unix();
 			}
 			serviceTotalActivity.save(request, function (info) {
 				var step = info.step;

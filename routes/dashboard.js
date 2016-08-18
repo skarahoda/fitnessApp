@@ -39,6 +39,23 @@ router.post('/timeActivityInfo', isLoggedIn, function (req, res) {
 });
 
 router.post('/stepCalorieInfo', isLoggedIn, function (req, res) {
+	var start;
+	var end = moment().unix();
+	if (req.body.intervalType == 4) {
+		start = req.body.start;
+		end = req.body.end;
+	}
+	else {
+		var timeDiff = 24 * 60 * 60;
+		if (req.body.intervalType == 1) {
+			timeDiff *= 7;
+		} else if (req.body.intervalType == 2) {
+			timeDiff *= 30;
+		} else if (req.body.intervalType > 3) {
+			timeDiff *= 365;
+		}
+		start = end - timeDiff;
+	}
 	console.log(req.body);
 	var result = [
 		{
