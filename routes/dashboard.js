@@ -62,9 +62,43 @@ router.post('/stepCalorieInfo', isLoggedIn, function (req, res) {
 		'start': {$lt: end},
 		'end': {$lt: start}
 	}, function (workouts) {
-		var workoutlength = workouts.length;
-		for (var i = 0; i < workoutlength; i++) {
-
+		var results = [];
+		var result;
+		var points;
+		var workoutLength = workouts.length;
+		for (var i = 0; i < workoutLength; i++) {
+			points = workouts[i].points;
+			var pointsLength = points.length;
+			if (pointsLength > 0) {
+				result = {
+					c: [
+						{v: points[0].timeStamp},
+						{v: 0},
+						{v: 0}
+					]
+				};
+				results.push(result);
+			}
+			for (var j = 1; i < pointsLength; j++) {
+				result = {
+					c: [
+						{v: points[j].timeStamp},
+						{v: 0},
+						{v: 0}
+					]
+				};
+				results.push(result);
+			}
+			if (pointsLength > 1) {
+				result = {
+					c: [
+						{v: points[pointsLength - 1].timeStamp},
+						{v: 0},
+						{v: 0}
+					]
+				};
+				results.push(result);
+			}
 		}
 	});
 	var result = [
