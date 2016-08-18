@@ -72,10 +72,26 @@ angular.module('fitnessApp')
 				$scope.totalActivity.calorie.text = '%' + (calorie.completed * 100 / calorie.goal).toFixed(0) + ' of goal ' + calorie.goal;
 			});
 			serviceTime.save(request, function (info) {
-				$scope.timeActivityChart.data = info;
+				$scope.timeActivityChart.data = {
+					cols: [
+						{id: "a", label: "Activity Type", type: "string"},
+						{id: "h", label: "Hour", type: "number"}
+					],
+					rows: info
+				};
 			});
 			serviceStepCalorie.save(request, function (info) {
-				$scope.stepCalorieChart.data = info;
+				angular.forEach(info, function (row) {
+					row.c[0].v = moment.unix(row.c[0].v).toDate()
+				});
+				$scope.stepCalorieChart.data = {
+					cols: [
+						{id: "t", label: "Time", type: "date"},
+						{id: "s", label: "Steps per five minute", type: "number"},
+						{id: "c", label: "Calorie Burned", type: "number"}
+					],
+					rows: info
+				}
 			});
 
 		}

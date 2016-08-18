@@ -13,13 +13,13 @@ angular.module('fitnessApp')
 			stepCalorieInfo: function () {
 				return $resource('/dashboard/stepCalorieInfo', {},
 					{
-						save: {method: 'POST', isArray: false}
+						save: {method: 'POST', isArray: true}
 					});
 			},
 			timeActivityInfo: function () {
 				return $resource('/dashboard/timeActivityInfo', {},
 					{
-						save: {method: 'POST', isArray: false}
+						save: {method: 'POST', isArray: true}
 					});
 			}
 		}
